@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<info>
+	<id>files_volatile</id>
+	<name>Volatile Folder</name>
+	<namespace>FilesVolatile</namespace>
+	<description>Provides a temporary folder to every user and adds an occ command to expire files</description>
+	<licence>AGPL-3.0</licence>
+	<author>Jörn Friedrich Dreyer</author>
+	<version>0.0.1</version>
+	<types>
+		<filesystem/>
+	</types>
+
+	<website>https://github.com/owncloud/files_volatile</website>
+	<bugs>https://github.com/owncloud/files_volatile/issues</bugs>
+	<repository type="git">https://github.com/owncloud/files_volatile.git</repository>
+
+	<dependencies>
+		<owncloud min-version="9.1" max-version="9.2"/>
+	</dependencies>
+</info>
