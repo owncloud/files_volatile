@@ -19,6 +19,6 @@
  *
  */
 
-$manager = new \OCA\FilesVolatile\Manager();
+$manager = new \OCA\Files_Volatile\Manager();
 // This will cause the Storage wrapper in this app to intercept any storage calls
 \OCP\Util::connectHook('OC_Filesystem', 'setup', $manager, 'addVolatileFolder');

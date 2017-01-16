@@ -18,7 +18,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-use \OCA\FilesVolatile\Command\Expire;
+use \OCA\Files_Volatile\Command\Expire;
 
 
 /** @var Symfony\Component\Console\Application $application */

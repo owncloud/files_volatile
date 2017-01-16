@@ -19,7 +19,7 @@
  *
  */
 
-namespace OCA\FilesVolatile;
+namespace OCA\Files_Volatile;
 
 
 class Manager {

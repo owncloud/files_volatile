@@ -19,7 +19,7 @@
  *
  */
 
-namespace OCA\FilesVolatile\Command;
+namespace OCA\Files_Volatile\Command;
 
 use OC\Files\Node\Folder;
 use OCP\Files\Node;
