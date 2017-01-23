@@ -6,7 +6,7 @@
 	<description>Provides a temporary folder to every user and adds an occ command to expire files</description>
 	<licence>AGPL-3.0</licence>
 	<author>Jörn Friedrich Dreyer</author>
-	<version>0.0.1</version>
+	<version>0.0.2</version>
 	<types>
 		<filesystem/>
 	</types>

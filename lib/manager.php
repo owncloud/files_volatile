@@ -33,7 +33,7 @@ class Manager {
 		$dataDir = \OC::$server->getUserManager()->get($params['user'])->getHome();
 		$dataDir .= '/files_volatile';
 		if (!is_dir($dataDir)) {
-			mkdir($dataDir, 770, true);
+			mkdir($dataDir, 0770, true);
 		}
 		$folderName = \OC::$server->getConfig()->getAppValue(
 			'files_volatile', 'folder-name', 'Volatile Files'
