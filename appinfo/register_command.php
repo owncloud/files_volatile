@@ -24,5 +24,6 @@ use \OCA\FilesVolatile\Command\Expire;
 /** @var Symfony\Component\Console\Application $application */
 $application->add(new Expire(
 	\OC::$server->getUserManager(),
-	\OC::$server->getDatabaseConnection()
+	\OC::$server->getDatabaseConnection(),
+	\OC::$server->getRootFolder()
 ));

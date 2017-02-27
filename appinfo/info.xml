@@ -6,7 +6,6 @@
 	<description>Provides a temporary folder to every user and adds an occ command to expire files</description>
 	<licence>AGPL-3.0</licence>
 	<author>Jörn Friedrich Dreyer</author>
-	<version>0.0.2</version>
 	<types>
 		<filesystem/>
 	</types>
@@ -16,6 +15,6 @@
 	<repository type="git">https://github.com/owncloud/files_volatile.git</repository>
 
 	<dependencies>
-		<owncloud min-version="9.1" max-version="9.2"/>
+		<owncloud min-version="9.1" max-version="10"/>
 	</dependencies>
 </info>
