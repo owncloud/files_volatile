@@ -19,10 +19,16 @@
  *
  */
 use \OCA\FilesVolatile\Command\Expire;
-
+use \OCA\FilesVolatile\Command\LastSeen;
 
 /** @var Symfony\Component\Console\Application $application */
 $application->add(new Expire(
+	\OC::$server->getUserManager(),
+	\OC::$server->getDatabaseConnection(),
+	\OC::$server->getRootFolder()
+));
+
+$application->add(new LastSeen(
 	\OC::$server->getUserManager(),
 	\OC::$server->getDatabaseConnection(),
 	\OC::$server->getRootFolder()
