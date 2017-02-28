@@ -35,5 +35,5 @@ You can test what would happen by adding `--dry-run`
 Todo
 ----
 
-- [ ] add disk usage report without volatile files
+- [x] add disk usage report without volatile files
 - [ ] store volatile files on objectstore

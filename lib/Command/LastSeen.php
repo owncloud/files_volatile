@@ -29,6 +29,7 @@ use Doctrine\DBAL\Platforms\OraclePlatform;
 use OC\Core\Command\Base;
 use OCP\DB\QueryBuilder\IQueryBuilder;
 use OCP\Files\IRootFolder;
+use OCP\Files\NotFoundException;
 use OCP\IDBConnection;
 use OCP\IUserManager;
 use Symfony\Component\Console\Input\InputInterface;
@@ -224,8 +225,12 @@ class LastSeen extends Base  {
 							$home = $this->rootFolder->getUserFolder($user->getUID());
 							$users[$key]['free'] = $home->getFreeSpace();
 							$users[$key]['used'] = $home->getSize();
-							$volatile = $home->getParent()->get('files_volatile');
-							$users[$key]['volatile'] = $volatile->getSize();
+							try {
+								$volatile = $home->getParent()->get('files_volatile');
+								$users[$key]['volatile'] = $volatile->getSize();
+							} catch (NotFoundException) {
+								$users[$key]['volatile'] = 0;
+							}
 						} else {
 							// user no longer exists
 							$users[$key]['status'] = 'missing';
