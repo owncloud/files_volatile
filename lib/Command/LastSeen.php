@@ -228,7 +228,7 @@ class LastSeen extends Base  {
 							try {
 								$volatile = $home->getParent()->get('files_volatile');
 								$users[$key]['volatile'] = $volatile->getSize();
-							} catch (NotFoundException) {
+							} catch (NotFoundException $e) {
 								$users[$key]['volatile'] = 0;
 							}
 						} else {
