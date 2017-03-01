@@ -22,6 +22,7 @@
 namespace OCA\FilesVolatile\Command;
 
 use OC\Files\Node\Folder;
+use OC\User\NoUserException;
 use OCP\Files\Node;
 use OCP\Files\NotFoundException;
 use OCP\Files\IRootFolder;
@@ -127,6 +128,9 @@ class Expire extends Command {
 				$output->writeln("<error>No volatile folder for $userId</error>");
 				return;
 			}
+		} catch (NoUserException $ex) {
+			$output->writeln("<error>NoUserException {$ex->getMessage()}</error>");
+			return;
 		} catch (NotFoundException $ex) {
 			$output->writeln("<error>NotFoundException {$ex->getMessage()}</error>");
 			return;
