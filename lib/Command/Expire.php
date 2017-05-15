@@ -94,8 +94,10 @@ class Expire extends Command {
 		if (empty($userIds)) {
 			$userIds = $this->getSeenUsers();
 		}
+		$date = new \DateTime($days . ' days ago');
+		$output->writeln("Checking files older than $days days ago using timestamp: {$date->getTimestamp()}");
 		foreach ($userIds as $userId) {
-			$this->expire($userId, $days, $dryRun, $output);
+			$this->expire($userId, $date, $dryRun, $output);
 		}
 	}
 
@@ -110,7 +112,7 @@ class Expire extends Command {
 		}
 	}
 
-	public function expire($userId, $days = 30, $dryRun, OutputInterface $output) {
+	public function expire($userId, \DateTime $date, $dryRun, OutputInterface $output) {
 		$output->writeln("Expiring volatile files for $userId");
 		$folderName = \OC::$server->getConfig()->getAppValue('files_volatile', 'folder-name', 'Volatile Files');
 
@@ -135,24 +137,26 @@ class Expire extends Command {
 			$output->writeln("<error>NotFoundException {$ex->getMessage()}</error>");
 			return;
 		}
-		foreach ($volatileFolder->getDirectoryListing() as $node) {
-			$this->expireNode($node, $days, $dryRun, $output);
+		$this->expireNodes($volatileFolder, $date, $dryRun, $output);
+	}
+	public function expireNodes(Folder $folder, \DateTime $date, $dryRun = false, OutputInterface $output) {
+		foreach ($folder->getDirectoryListing() as $node) {
+			$this->expireNode($node, $date, $dryRun, $output);
 		};
 	}
-	public function expireNode(Node $node, $days = 30, $dryRun = false, OutputInterface $output) {
+	public function expireNode(Node $node, \DateTime $date, $dryRun = false, OutputInterface $output) {
 		//we propagate mtimes so we can delete a dir if it hasn't been changed
-		if ($this->isOlderThan($node->getMTime(), $days)) {
-			$output->writeln("deleting {$node->getPath()}");
+		if ($this->isOlderThan($node->getMTime(), $date)) {
+			$output->writeln("deleting {$node->getPath()} with mtime: {$node->getMTime()}");
 			if ($dryRun === false) {
 				$node->delete();
 			}
 		} else if ($node instanceof Folder) {
-			$this->expireNode($node, $days, $output);
+			$this->expireNodes($node, $date, $dryRun, $output);
 		}
 	}
 
-	public function isOlderThan($mtime, $days = 30) {
-		$date = new \DateTime($days . ' days ago');
+	public function isOlderThan($mtime, \DateTime $date) {
 		return $mtime < $date->getTimestamp();
 	}
 }
